@@ -1,5 +1,7 @@
+//THIS CONTROLS WHICH STAGING YOU'LL BE TESTING IN!!!!
 const BASE_URL = 'https://staging7.townsquareinteractive.com/tsi/admin/portal/';
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
 describe('Client Registration Manual Sale', () => {
   beforeEach(() => {
     // Set the desired viewport size before each test
@@ -8,7 +10,7 @@ describe('Client Registration Manual Sale', () => {
 
   it('Gets, types and asserts', () => {
 
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!LOGGING INTO AP!!!!!!!!!!*/
 
     //Feature Flag Pin For The Offline Mode
@@ -31,6 +33,7 @@ describe('Client Registration Manual Sale', () => {
 
      /*!!!!!!!LOGGING INTO AP!!!!!!!!!!*/
 
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/      
     /*!!!!!!!NAVIGATING TO THE SALESDASHBOARD!!!!!!!!!!*/
 
     //Pass| Fail to prove you're on the right page
@@ -51,7 +54,7 @@ describe('Client Registration Manual Sale', () => {
     
      /*!!!!!!!NAVIGATING TO THE SALESDASHBOARD!!!!!!!!!!*/
 
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!SALES SETTINGS!!!!!!!!!!*/
 
     // Select Client Type
@@ -69,7 +72,7 @@ describe('Client Registration Manual Sale', () => {
 
     /*!!!!!!!SALES SETTINGS!!!!!!!!!!*/
 
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!FAKE CLIENT INFO GENERATION!!!!!!!!!!*/
     // Generate A Random Company Name
     const companyName = generateRandomCompanyName();
@@ -123,6 +126,7 @@ describe('Client Registration Manual Sale', () => {
     }
     /*!!!!!!!FAKE CLIENT INFO GENERATION!!!!!!!!!!*/
 
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!SERVICE AGREEMENT!!!!!!!!!!*/
 
     // Select Deal Type
@@ -147,6 +151,7 @@ describe('Client Registration Manual Sale', () => {
  
     /*!!!!!!!SERVICE AGREEMENT!!!!!!!!!!*/
 
+ /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/    
     /*Feature Additions...just a heads up this might be VERY brittle...but this is the only way to select things for this part.*/
     
     //Click Yes
@@ -169,7 +174,7 @@ describe('Client Registration Manual Sale', () => {
       
     /*Feature Additions...just a heads up this might be VERY brittle...but this is the only way to select things for this part.*/ 
 
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!!!!!PAYMENT TYPE!!!!!!!!!!!*/
 
     //Click TSI Payment Type
@@ -183,7 +188,7 @@ describe('Client Registration Manual Sale', () => {
 
     /*!!!!!!!!!!!PAYMENT TYPE!!!!!!!!!!!*/
 
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!!!!!CONFIRM & SUBMIT!!!!!!!!!!!*/
 
     //Click Confirm
@@ -196,7 +201,7 @@ describe('Client Registration Manual Sale', () => {
     cy.get('button#ajax-response-button-ok').click();    
      /*!!!!!!!!!!!CONFIRM & SUBMIT!!!!!!!!!!!*/
 
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!!!!!!!CREDIT CARD INFO!!!!!!!!!!!!*/
 
     //Client First Name
@@ -220,7 +225,7 @@ describe('Client Registration Manual Sale', () => {
 
     /*!!!!!!!!!!!!!CREDIT CARD INFO!!!!!!!!!!!!*/
     
-    
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/     
     /*!!!!!!!!!!!!!BILLING ADDRESS!!!!!!!!!!!!*/
     //Billing Address
     cy.get('a[ng-click="onShowValidateBillingAddressModal()"]').click(); 
@@ -248,7 +253,7 @@ describe('Client Registration Manual Sale', () => {
     //Submit Button
     cy.get('#validate-address-modal > div > div.modal-footer.bg-light > div > div:nth-child(2) > button').click();  
     /*!!!!!!!!!!!!!BILLING ADDRESS!!!!!!!!!!!!*/
-
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 
     /*!!!!!!!!!!!!!BUSINESS ADDRESS!!!!!!!!!!!!*/
 
@@ -281,19 +286,19 @@ describe('Client Registration Manual Sale', () => {
 
     /*!!!!!!!!!!!!!BUSINESS ADDRESS!!!!!!!!!!!!*/
 
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
     /*!!!!!!!!!!!CONFIRM & SUBMIT!!!!!!!!!!!*/
 
-    //Click confirm data  
+    //Click "I confirm that the information in this form is correct."
     cy.get('md-checkbox[ng-model="$ctrl.tsiClientRegistrationV2.state.confirmedFormData" ]').click();  
 
+    //Click "Confirm Order"
     cy.get('button[ng-disabled="!$ctrl.tsiClientRegistrationV2.state.confirmedFormData"]').click();  
 
-
+    //Click "Modal Ok"
     cy.get('div.modal-footer').find('a.btn-secondary').click();
 
- //cy.get('#dialogContent_162 > md-content > div:nth-child(2) > div > div:nth-child(2) > div > md-checkbox > div.md-container.md-ink-ripple').click(); // Click the "I confirm" radio button
-
-//cy.get('#dialogContent_162 > md-content > div:nth-child(2) > div > div:nth-child(2) > div > button').click(); // Click the "Process Payment" button
+    /*!!!!!!!!!!!CONFIRM & SUBMIT!!!!!!!!!!!*/
 
   });
 });
