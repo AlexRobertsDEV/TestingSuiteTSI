@@ -1,5 +1,5 @@
 //THIS CONTROLS WHICH STAGING YOU'LL BE TESTING IN!!!!
-const BASE_URL = 'https://staging7.townsquareinteractive.com/tsi/admin/portal/';
+const BASE_URL = 'https://ap-release.tsitest.app';
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
 describe('Client Registration Manual Sale', () => {
@@ -14,7 +14,7 @@ describe('Client Registration Manual Sale', () => {
     /*!!!!!!!LOGGING INTO AP!!!!!!!!!!*/
 
     //Feature Flag Pin For The Offline Mode
-    cy.visit(BASE_URL + '?ff=pin:offlineGpMode:0');
+    cy.visit(BASE_URL + '?ff=pin:offlineGpMode:1');
 
     //The Feature Flag To Bypass Microsoft Verification
     cy.visit(BASE_URL + '?ff=authHandler:laravel');
@@ -43,7 +43,8 @@ describe('Client Registration Manual Sale', () => {
     cy.get("a[ui-sref='tsi.ap.sales.dashboard']").click();
 
     //cy.pause();
-
+   
+    
     //Click the Manual Sales Entry Button
     cy.get('button.btn.btn-gray-200.btn-block.rounded-pill.py-2').contains('Manual Sales Entry').click();
     
@@ -67,7 +68,7 @@ describe('Client Registration Manual Sale', () => {
 
     // Salesperson Name
     cy.get("button.ng-scope[aria-label='Clear Input']").click();
-    cy.get('input[aria-label="Salesperson"]').type('Alex Roberts');
+    cy.get('input[aria-label="Salesperson"]').type('Amanda Johnson');
     cy.get('#md-option-1-0').click();
 
     /*!!!!!!!SALES SETTINGS!!!!!!!!!!*/
@@ -295,10 +296,22 @@ describe('Client Registration Manual Sale', () => {
     //Click "Confirm Order"
     cy.get('button[ng-disabled="!$ctrl.tsiClientRegistrationV2.state.confirmedFormData"]').click();  
 
-    //Click "Modal Ok"
+    //Click "Submit Button"
     cy.get('div.modal-footer').find('a.btn-secondary').click();
 
+    //Click "Modal Ok"
+    cy.get('div.modal-footer').find('button.btn-primary').click();
+
     /*!!!!!!!!!!!CONFIRM & SUBMIT!!!!!!!!!!!*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+    /*!!!!!!!!!!!FINALIZE NEW REGISTRATION!!!!!!!!!!!*/
+
+      //Type in Zipcode 
+      cy.get('input[name="zipcode"]').type('12410'); 
+  
+
+    /*!!!!!!!!!!!FINALIZE NEW REGISTRATION!!!!!!!!!!!*/
 
   });
 });
