@@ -1,8 +1,8 @@
 //THIS CONTROLS WHICH STAGING YOU'LL BE TESTING IN!!!!
-const BASE_URL = 'https://ap-release.tsitest.app';
+const BASE_URL = 'https://tsi--clientreg.sandbox.my.salesforce.com/ui/setup/storage/OrgLargestFiles?setupid=CompanyResourceDisk';
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
-describe('Client Registration Manual Sale', () => {
+describe('Delete Storage', () => {
   beforeEach(() => {
     // Set the desired viewport size before each test
     cy.viewport(1280, 720); // Adjust the values according to your needs
@@ -14,10 +14,9 @@ describe('Client Registration Manual Sale', () => {
     /*!!!!!!!LOGGING INTO AP!!!!!!!!!!*/
 
     //Feature Flag Pin For The Offline Mode
-    cy.visit(BASE_URL + '?ff=pin:offlineGpMode:1');
+    cy.visit(BASE_URL);
 
-    //The Feature Flag To Bypass Microsoft Verification
-    cy.visit(BASE_URL + '?ff=authHandler:laravel');
+    cy.wait(1000000)
 
     //Verify You're On The Correct Lo
     cy.get('.text-center').contains('Log into Campfire');
