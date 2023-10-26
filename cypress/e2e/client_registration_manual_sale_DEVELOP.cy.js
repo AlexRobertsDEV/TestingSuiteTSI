@@ -28,22 +28,8 @@ describe('Client Registration Manual Sale', () => {
     //The Feature Flag To Bypass Microsoft Verification
     cy.visit(baseURL + '?ff=authHandler:laravel');
 
-    //Verify You're On The Correct Login
-    cy.get('.text-center').contains('Log into Campfire');
-
-    //Enter Username
-    cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
-
-    //Enter Password
-    cy.get('input[placeholder="Password"]').type('Orange9!');
-
-    //Click The Sign-In Button
-    cy.get('body > div > tsi-admin-portal > div > div.container-fluid.tsi-ap-container > div.ng-scope > ui-view > div > div > div > div > div > div > div.panel-body > tsi-authentication > div.login-form > form > div:nth-child(5) > div > button').click();
-
-
-    //TEMPORARY FOR TESTING PURPOSES
     // //Verify You're On The Correct Login
-    // //cy.get('.login .text-center h3').should('contain.text', /^Log into the?Client Admin Portal$/);
+    // cy.get('.text-center').contains('Log into Campfire');
 
     // //Enter Username
     // cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
@@ -52,7 +38,21 @@ describe('Client Registration Manual Sale', () => {
     // cy.get('input[placeholder="Password"]').type('Orange9!');
 
     // //Click The Sign-In Button
-    // cy.get('button.btn.btn-lg.btn-block.btn-outline-dark').contains('Log In').click();
+    // cy.get('body > div > tsi-admin-portal > div > div.container-fluid.tsi-ap-container > div.ng-scope > ui-view > div > div > div > div > div > div > div.panel-body > tsi-authentication > div.login-form > form > div:nth-child(5) > div > button').click();
+
+
+    //TEMPORARY FOR TESTING PURPOSES
+    //Verify You're On The Correct Login
+    //cy.get('.login .text-center h3').should('contain.text', /^Log into the?Client Admin Portal$/);
+
+    //Enter Username
+    cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
+
+    //Enter Password
+    cy.get('input[placeholder="Password"]').type('Orange9!');
+
+    //Click The Sign-In Button
+    cy.get('button.btn.btn-lg.btn-block.btn-outline-dark').contains('Log In').click();
 
 
     /*!!!!!!!LOGGING INTO AP!!!!!!!!!!*/
