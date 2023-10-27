@@ -36,27 +36,24 @@ describe('Create Site Tool', () => {
   });
 
   const companies = [
-    // { gpid: 'TI PHARMA001Z', name: 'Pharmaceutical Services FAKE' },
-    // { gpid: 'TI PARTNE001Z', name: 'Partners Pacific FAKE' },
-    // { gpid: 'TI CONSTR001Z', name: 'Construction Health FAKE' },
-    // { gpid: 'TI LIGUE1002Z', name: 'Ligue 1 Associates FAKE' },
+    { gpid: 'TI PHARMA001Z', name: 'Pharmaceutical Services FAKE' },
+    { gpid: 'TI PARTNE001Z', name: 'Partners Pacific FAKE' },
+    { gpid: 'TI CONSTR001Z', name: 'Construction Health FAKE' },
+    { gpid: 'TI LIGUE1002Z', name: 'Ligue 1 Associates FAKE' },
     { gpid: 'TI ENERGI003Z', name: 'Energies Atlantic FAKE' },
-    // { gpid: 'TI FUNDIN003Z', name: 'Funding Transportation FAKE' },
-    // { gpid: 'TI PARTNE002Z', name: 'Partners Funding FAKE' },
-    // { gpid: 'TI BUNDES003Z', name: 'Bundesliga Media FAKE' },
-    // { gpid: 'TI LIGUE1003Z', name: 'Ligue 1 Innovations FAKE' }
+    { gpid: 'TI FUNDIN003Z', name: 'Funding Transportation FAKE' },
+    { gpid: 'TI PARTNE002Z', name: 'Partners Funding FAKE' },
+    { gpid: 'TI BUNDES003Z', name: 'Bundesliga Media FAKE' },
+    { gpid: 'TI LIGUE1003Z', name: 'Ligue 1 Innovations FAKE' }
   ];
 
 
   companies.forEach(company => {
     it(`Search and verify ${company.gpid}`, () => {
       // Set up network request interception
-      // cy.intercept('GET', '/laravel/api/v1/public/admin-portal/settings').as('getSettings');
-      // cy.intercept('GET', `/laravel/api/v1/admin-portal/finance/clients?cacheStrategy=fallback&contract=all&gpid=${company.gpid}&includeIgniteClients=false`).as('getFinanceClients');
-      // cy.intercept('GET', '/laravel/api/v2/resources/site-templates?type=duda').as('getSiteTemplates');
-      // cy.intercept('GET', '/laravel/api/v2/resources/clients?searchString=TI%20ENERGI003Z').as('searchClients');
-      // cy.intercept('GET', '/laravel/api/v1/admin-portal/service-turn-time').as('getServiceTurnTime');
-      // cy.intercept('POST', '/laravel/api/v2/resources/create-site').as('postCreateSite');
+      cy.intercept('GET', '/laravel/api/v2/resources/site-templates?type=duda').as('getSiteTemplates');
+      cy.intercept('GET', '/laravel/api/v1/admin-portal/service-turn-time').as('getServiceTurnTime');
+      cy.intercept('POST', '/laravel/api/v2/resources/create-site').as('postCreateSite');
 
 
       cy.visit(baseURL + '/client-search-v2?ff=authHandler:laravel');
@@ -86,38 +83,24 @@ describe('Create Site Tool', () => {
       // Wait for the transition to complete (adjust the time as per your transition duration)
       cy.wait(1000);
 
+      // cy.visit('https://ap-release.tsitest.app/client/TI%20FUNDIN003Z/create-site?ff=authHandler:laravel', { timeout: 10000 });
 
+
+      // cy.pause();
+      
       // Now click the 'Create Site' button
       cy.get('.tw-bg-base-50 button[title="Create Site"]')
         .should('be.visible')
-        .click();
+        // .click();
+
+      cy.visit(`${baseURL}/client/${encodeURIComponent(company.gpid)}/create-site?ff=authHandler:laravel`, { timeout: 10000 });
 
 
       // Wait for the XHR requests to complete
-
-      // //1 
-      // // https://staging005.townsquareinteractive.com/laravel/api/v1/public/admin-portal/settings
-      // cy.wait('@getSettings');
-
-      // //2
-      // // https://staging005.townsquareinteractive.com/laravel/api/v1/admin-portal/finance/clients?cacheStrategy=fallback&contract=all&gpid=TI+ENERGI003Z&includeIgniteClients=false
-      // cy.wait('@getClientsFinance');
-
-      // //3
-      // // https://staging005.townsquareinteractive.com/laravel/api/v2/resources/site-templates?type=duda
-      // cy.wait('@getSiteTemplates');
-
-      // //4
-      // // https://staging005.townsquareinteractive.com/laravel/api/v2/resources/clients?searchString=TI%20ENERGI003Z
-      // cy.wait('@getClientsResources');
-
-      // //5
-      // // https://staging005.townsquareinteractive.com/laravel/api/v1/admin-portal/service-turn-time
-      // cy.wait('@getServiceTurnTime');
-
-      // //6
-      // // https://staging005.townsquareinteractive.com/laravel/api/v2/resources/site-templates?type=duda
-      // cy.wait('@getSiteTemplates');
+      // cy.wait('@getFinanceClients');
+      // cy.wait('@searchClients');
+      cy.wait('@getSiteTemplates');
+      cy.wait('@getServiceTurnTime');
 
 
       // Verify the input exists once the page loads
@@ -134,7 +117,7 @@ describe('Create Site Tool', () => {
         'Accountant',
         'Painter',
         'Life Coach',
-        'Nutrion Advisor',
+        'Nutrition Advisor',
         'Real Estate',
         'Car Dealer',
         'Real Estate Agency',
@@ -145,12 +128,12 @@ describe('Create Site Tool', () => {
       const randomSearchTerm = templateSearchTermsArray[Math.floor(Math.random() * templateSearchTermsArray.length)];
 
       // Ensure the input is visible and interactable before typing
-      cy.get('input[placeholder="Search by GPID, Company Name, Email Address, or Phone Number"]')
+      cy.get('input[placeholder="Search by template name"]')
         .should('be.visible')
         .clear()
         .type(randomSearchTerm);
 
-      cy.pause();
+
 
       cy.get('.tw-grid .tw-flex h6')
         .contains(randomSearchTerm)
@@ -212,16 +195,18 @@ describe('Create Site Tool', () => {
         });
       });
 
-      // Later in your test, you can access the stored values using cy.get()
       cy.get('@payload').then((payload) => {
         cy.log('Entire Payload:', payload);
       });
 
+      cy.visit(`${baseURL}/client/${encodeURIComponent(company.gpid)}/website-domain-mapping?ff=authHandler:laravel`, { timeout: 10000 }); 
+      
+      const domainMappingPrimaryCheckUrl = `${subdomain}.townsquareinteractive.com`;
+
+      
+      cy.checkStringInElement('tsi-website-domain-mapping-websites md-input-container .ng-binding', domainMappingPrimaryCheckUrl);
+
       /*!!!!!!!!!!TEST CONDITIONS THAT NEED TO BE MET!!!!!!!!!!!*/
-
-
-      cy.pause();
-
 
     });
   });

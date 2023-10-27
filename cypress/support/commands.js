@@ -75,6 +75,16 @@ Cypress.Commands.add('waitForLoadingAndSelect', (loadingSelector, selectSelector
       });
   });
 
+  Cypress.Commands.add('checkStringInElement', (selector, textToCheck) => {
+    cy.get(selector).each(($el) => {
+      const text = $el.text();
+      if (text.includes(textToCheck)) {
+        expect(text).to.include(textToCheck);
+      }
+    });
+  });
+  
+
 //   Cypress.Commands.add('uploadFileWithRetry', (selector, fileName, fileCheckSelector, maxRetries = 3) => {
 //     const attemptUpload = (retryCount) => {
 //       if (retryCount >= maxRetries) {
