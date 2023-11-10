@@ -16,7 +16,9 @@ describe('Create Site Tool', () => {
     cy.visit(baseURL + '?ff=authHandler:laravel');
 
     //Verify You're On The Correct Login
-    cy.get('.text-center').contains('Log into Campfire');
+    cy.get('h3.text-center').should('contain.text', 'Log into')
+      .and('contain.text', 'Client Admin Portal');
+
 
     //Enter Username
     cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
@@ -25,7 +27,7 @@ describe('Create Site Tool', () => {
     cy.get('input[placeholder="Password"]').type('Orange9!');
 
     //Click The Sign-In Button
-    cy.get('body > div > tsi-admin-portal > div > div.container-fluid.tsi-ap-container > div.ng-scope > ui-view > div > div > div > div > div > div > div.panel-body > tsi-authentication > div.login-form > form > div:nth-child(5) > div > button').click();
+    cy.get('.login-form button').should('contain.text', 'Log In').click();
 
     // Asserting the presence of a unique element and checking its placeholder attribute
     cy.get('input[placeholder="Search by GPID, Company Name, Email Address, or Phone Number"]', { timeout: 10000 })
