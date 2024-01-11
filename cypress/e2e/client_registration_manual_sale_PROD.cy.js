@@ -1,8 +1,8 @@
 import 'cypress-wait-until';
 
 //THIS CONTROLS WHICH STAGING YOU'LL BE TESTING IN!!!!
-const baseURL = 'ap-develop.tsitest.app';
-const baseSocketRequestURL = 'https://staging7.townsquareinteractive.com/socket.io/*';
+const baseURL = 'https://dms.townsquareinteractive.com/tsi/admin/portal/login';
+const baseSocketRequestURL = 'https://production.townsquareinteractive.com/socket.io/*';
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
 describe('Client Registration Manual Sale', () => {
@@ -28,8 +28,24 @@ describe('Client Registration Manual Sale', () => {
     //The Feature Flag To Bypass Microsoft Verification
     cy.visit(baseURL + '?ff=authHandler:laravel');
 
+        //Verify You're On The Correct Login
+        cy.get('h3.text-center').should('contain.text', 'Log into')
+        .and('contain.text', 'Client Admin Portal');
+  
+  
+      //Enter Username
+      cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
+  
+      //Enter Password
+      cy.get('input[placeholder="Password"]').type('Orange9!');
+  
+      //Click The Sign-In Button
+      cy.get('.login-form button').should('contain.text', 'Log In').click();
+
+
+    //TEMPORARY FOR TESTING PURPOSES
     // //Verify You're On The Correct Login
-    // cy.get('.text-center').contains('Log into Campfire');
+    // //cy.get('.login .text-center h3').should('contain.text', /^Log into the?Client Admin Portal$/);
 
     // //Enter Username
     // cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
@@ -38,26 +54,7 @@ describe('Client Registration Manual Sale', () => {
     // cy.get('input[placeholder="Password"]').type('Orange9!');
 
     // //Click The Sign-In Button
-    // cy.get('body > div > tsi-admin-portal > div > div.container-fluid.tsi-ap-container > div.ng-scope > ui-view > div > div > div > div > div > div > div.panel-body > tsi-authentication > div.login-form > form > div:nth-child(5) > div > button').click();
-
-
-    //TEMPORARY FOR TESTING PURPOSES
-    //Verify You're On The Correct Login
-    //cy.get('.login .text-center h3').should('contain.text', /^Log into the?Client Admin Portal$/);
-
-    //Verify You're On The Correct Login
-    cy.get('h3.text-center').should('contain.text', 'Log into')
-      .and('contain.text', 'Client Admin Portal');
-
-
-    //Enter Username
-    cy.get('input[placeholder="Username or Email"]').type('alex.roberts@townsquareinteractive.com');
-
-    //Enter Password
-    cy.get('input[placeholder="Password"]').type('Orange9!');
-
-    //Click The Sign-In Button
-    cy.get('.login-form button').should('contain.text', 'Log In').click();
+    // cy.get('button.btn.btn-lg.btn-block.btn-outline-dark').contains('Log In').click();
 
 
     /*!!!!!!!LOGGING INTO AP!!!!!!!!!!*/

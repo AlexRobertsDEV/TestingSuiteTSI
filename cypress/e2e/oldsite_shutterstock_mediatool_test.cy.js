@@ -1,7 +1,7 @@
 import 'cypress-wait-until';
 
 // Set the base URL for the staging environment you want to test
-const baseURL = 'https://bmdshutterstocktest.staging7.townsquareinteractive.com/';
+const baseURL = 'https://lunadefault-demo.staging7.townsquareinteractive.com/';
 
 describe('Shutterstock Tool Test', () => {
     beforeEach(() => {

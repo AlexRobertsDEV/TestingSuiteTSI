@@ -1,7 +1,7 @@
 import 'cypress-wait-until';
 
 // Set the base URL for the staging environment you want to test
-const baseURL = 'https://bmdshutterstocktest.staging7.townsquareinteractive.com/';
+const baseURL = 'https://tagassistant.google.com/';
 
 describe('Shutterstock Tool Test', () => {
     beforeEach(() => {
@@ -9,7 +9,9 @@ describe('Shutterstock Tool Test', () => {
         cy.viewport(1280, 720); // You can adjust the width and height values as needed
 
         // Visit the baseURL before each test
-        cy.visit(baseURL + 'cms/#!/login');
+        cy.visit(baseURL);
+
+        cy.pause();
 
         //Verify You're On The Login Page
         cy.get('img.img-responsive') // This gets all images with the class 'img-responsive'
